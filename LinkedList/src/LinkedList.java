@@ -22,6 +22,28 @@ public class LinkedList <T> {
         listSize++;
     }
 
+    public void add(T object, int index) {
+        if (index > listSize + 1) {
+            throw new Error("No Node to insert the element at in the Linked List!");
+        }
+
+        LinkedListNode newNode = new LinkedListNode(object);
+        LinkedListNode nextNode = firstNode;
+        if (index == 0) {
+            add(object);
+        } else {
+            for (int i = 0; i < index; i++) {
+                if (i + 1 == index) {
+                    newNode.setNext(nextNode.getNext());
+                    nextNode.setNext(newNode);
+                } else {
+                    nextNode = nextNode.getNext();
+                }
+            }
+            listSize++;
+        }
+    }
+
     /**
      * Removes the last element of the Linked List to be inserted.
      */
@@ -36,7 +58,7 @@ public class LinkedList <T> {
      */
     public void remove(int indexToRemove) {
         if (indexToRemove > listSize) {
-            throw new Error("No Node to remove from the LinkedList");
+            throw new Error("No Node to remove from the LinkedList!");
         }
 
         LinkedListNode previousNode = null;
